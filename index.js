@@ -7,14 +7,10 @@ const mongoose = require('mongoose');
 
 const { DB_USERNAME, DB_PASS, NODE_ENV, PORT } = process.env;
 const corsOptions = {
-    origin: '*',
-    methods: 'GET,POST,PUT,DELETE',
-    allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
-    optionsSuccessStatus: 200,
-    credentials: true,
+    origin: "http://localhost:4200"
 };
 app.use(cors(corsOptions));
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 console.log('Connecting to DB...');
 mongoose.connect(process.env.DB_URL)

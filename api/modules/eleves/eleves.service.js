@@ -1,10 +1,10 @@
 const Eleve = require('./eleves.schema');
 module.exports.list = async () => {
-    return await Eleve.find();
+    return await Eleve.find().populate('classe');
 }
 
 module.exports.getOne = async (id) => {
-    return await Eleve.findById(id);
+    return await Eleve.findById(id).populate('classe');
 }
 
 module.exports.insertOne = async (input) => {
@@ -15,6 +15,10 @@ module.exports.deleteOne = async (id) => {
     return await Eleve.findByIdAndRemove(id);
 }
 
-module.exports.edit = async (input, id) => {
+module.exports.deleteMany = async (idClasse) => {
+    return await Eleve.deleteMany({classe: idClasse});
+}
+
+module.exports.edit = async (id, input) => {
     return await Eleve.findByIdAndUpdate(id, input, {new: true});
 }
